@@ -1,2 +1,2 @@
 # FP
-Functional programming
+Ћабораторные работы по ѕ—яѕ
