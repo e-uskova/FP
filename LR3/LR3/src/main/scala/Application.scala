@@ -93,7 +93,7 @@ object Application {
 
     }
 
-    def insertTree(el: Int, tree: BSTree): BSTree = {
+    def insert(el: Int, tree: BSTree): BSTree = {
       var newTree = new BSTree
 
       def copyNodes(node: Node): BSTree  = {
@@ -116,6 +116,50 @@ object Application {
       newTree
     }
 
+    def contains(el: Int, tree: BSTree): Boolean = {
+      var res = false
+
+      def seekInNodes(node: Node): Boolean = {
+        res = res || (node.getNodeData == el)
+
+        if (node.getLeftSubtree != null) {
+          seekInNodes(node.getLeftSubtree)
+        }
+
+        if (node.getRightSubtree != null) {
+          seekInNodes(node.getRightSubtree)
+        }
+
+        res
+      }
+
+      if (tree.getNodeData == -1) println("empty")
+      else res = seekInNodes(tree.head)
+      res
+    }
+
+    def sum(tree: BSTree): Int = {
+      var sum = 0
+
+      def sumInNodes(node: Node): Int = {
+        sum += node.getNodeData
+
+        if (node.getLeftSubtree != null) {
+          sumInNodes(node.getLeftSubtree)
+        }
+
+        if (node.getRightSubtree != null) {
+          sumInNodes(node.getRightSubtree)
+        }
+
+        sum
+      }
+
+      if (tree.getNodeData == -1) println("empty")
+      else sum = sumInNodes(tree.head)
+      sum
+    }
+
     val testTree = new BSTree
 
     testTree.Add(8)
@@ -126,6 +170,9 @@ object Application {
     testTree.Add(9)
 
     printTree(testTree)
-    printTree(insertTree(4, testTree))
+//    printTree(insert(4, testTree))
+//    println(contains(4, testTree))
+    println(sum(testTree))
   }
+
 }
